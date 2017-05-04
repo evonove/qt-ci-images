@@ -1,0 +1,3 @@
+[profile jenkins]
+output = json
+region = eu-west-1

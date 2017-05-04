@@ -1,0 +1,18 @@
+# Anible playbook that provision a Ubuntu node
+# with requirements to build and run QT tests
+---
+
+- hosts: default
+  remote_user: ubuntu
+  become: true
+  gather_facts: no
+
+  pre_tasks:
+    - name: Install python2
+      raw: sudo apt -y install python-minimal aptitude
+
+  roles:
+    - utils
+    - xvfb
+    - android
+    - qt

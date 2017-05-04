@@ -1,0 +1,19 @@
+---
+ - name: Add Xvfb to systemd service
+   copy:
+     src: files/xvfb.service
+     dest: /etc/systemd/system/xvfb.service
+     mode: 0644
+     owner: root
+     group: root
+
+ - name: Enable Xvfb systemd service
+   service:
+     name: xvfb
+     enabled: yes
+
+ - name: Start Xvfb systemd service
+   service:
+     name: xvfb
+     state: started
+

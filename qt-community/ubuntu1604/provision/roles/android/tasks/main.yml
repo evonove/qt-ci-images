@@ -1,0 +1,25 @@
+---
+ - name: Create Android SDK directory
+   file:
+     path: /home/ubuntu/android-sdk
+     state: directory
+     mode: 0755
+
+ - name: Download Android SDK
+   unarchive:
+     src: "{{ android_sdk_url }}"
+     dest: /home/ubuntu/android-sdk
+     remote_src: True
+     mode: 0700
+     owner: ubuntu
+     group: ubuntu
+
+ - name: Install Android SDK packages
+   shell: echo 'y' | ./sdkmanager "{{ item }}"
+   args:
+     chdir: /home/ubuntu/android-sdk/tools/bin/
+   with_items:
+     - build-tools;25.0.3
+     - ndk-bundle
+     - platform-tools
+     - platforms;android-25

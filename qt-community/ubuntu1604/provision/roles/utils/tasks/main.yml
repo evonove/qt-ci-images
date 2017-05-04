@@ -1,0 +1,42 @@
+---
+ - name: Updating apt cache and upgrade the system
+   apt:
+     update_cache: yes
+
+ - name: Installing dependencies...
+   apt:
+     name: "{{ item }}"
+     state: installed
+   with_items:
+     - unzip
+     - build-essential
+     - libx11-xcb-dev
+     - libfontconfig1-dev
+     - libgl1-mesa-dev
+     - libegl1-mesa
+     - flex
+     - bison
+     - xvfb
+     - openjdk-8-jdk
+
+ - name: Create aws directory
+   file:
+     path: /home/ubuntu/.aws
+     state: directory
+     mode: 0755
+
+ - name: Create aws profile
+   template:
+     src: files/config
+     dest: /home/ubuntu/.aws/config
+     owner: ubuntu
+     group: ubuntu
+     mode: 0600
+
+ - name: Export credentials
+   copy:
+     src: "{{ playbook_dir }}/roles/utils/files/credentials"
+     dest: /home/ubuntu/.aws/credentials
+     owner: ubuntu
+     group: ubuntu
+     mode: 0600

@@ -1,0 +1,28 @@
+---
+ - name: Download Qt installer
+   get_url:
+     url: "{{ qt_linux_url }}"
+     dest: /tmp/qt_linux.run
+     checksum: "{{ qt_linux_checksum }}"
+     mode: 0700
+     owner: ubuntu
+     group: ubuntu
+
+ - name: Copy qt installer script
+   become_user: ubuntu
+   template:
+     src: files/qt-installer-script.qs
+     dest: /tmp/qt-installer-script.qs
+     owner: ubuntu
+     group: ubuntu
+
+ - stat:
+    path: /home/ubuntu/Qt/5.8
+   register: qtpath
+
+ - name: Run the installer
+   become_user: ubuntu
+   command: /tmp/qt_linux.run --script /tmp/qt-installer-script.qs
+   when: qtpath.stat.exists == False
+   environment:
+     DISPLAY: ":99.0"
