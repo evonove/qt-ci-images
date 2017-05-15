@@ -1,0 +1,16 @@
+---
+ - name: Move test script
+   template:
+     src: files/test.sh
+     dest: /home/ubuntu/test.sh
+     owner: ubuntu
+     group: ubuntu
+     mode: 0755
+
+ - name: Move Android build script
+   template:
+     src: files/build_android.sh
+     dest: /home/ubuntu/build_android.sh
+     owner: ubuntu
+     group: ubuntu
+     mode: 0755
