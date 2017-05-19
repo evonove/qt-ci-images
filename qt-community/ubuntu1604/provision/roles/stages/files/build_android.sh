@@ -1,5 +1,8 @@
 #!/bin/bash
 
+export ANDROID_SDK_ROOT="/home/ubuntu/android-sdk"
+export ANDROID_NDK_ROOT="/home/ubuntu/android-sdk/ndk-bundle"
+
 android_wd=$1
 android_file=$2
 project_dir=$3

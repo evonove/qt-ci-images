@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export DISPLAY=":99"
+
 linux_wd=$1
 workspace_dir=$2
 
